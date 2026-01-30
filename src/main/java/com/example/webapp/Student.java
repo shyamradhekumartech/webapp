@@ -26,11 +26,16 @@ public class Student {
     )
     private StudentProfile studentProfile;
 
+    @ManyToOne
+    @JoinColumn(
+            name = "school_id"
+    )
+    private School school;
+
     public Student() {
     }
 
-    public Student(Integer id, String firstname, String lastname, String email, int age) {
-        this.id = id;
+    public Student(String firstname, String lastname, String email, int age) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -77,6 +82,22 @@ public class Student {
         this.age = age;
     }
 
+    public StudentProfile getStudentProfile() {
+        return studentProfile;
+    }
+
+    public void setStudentProfile(StudentProfile studentProfile) {
+        this.studentProfile = studentProfile;
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -85,6 +106,8 @@ public class Student {
                 ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +
                 ", age=" + age +
+                ", studentProfile=" + studentProfile +
+                ", school=" + school +
                 '}';
     }
 }
