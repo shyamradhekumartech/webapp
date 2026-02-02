@@ -15,11 +15,12 @@ public class StudentController {
     }
 
     @PostMapping("/students")
-    public Student post(
+    public StudentResponseDto post(
             @RequestBody StudentDto dto
     ) {
         var student = toStudent(dto);
-        return studentRepository.save(student);
+        var savedStudent = studentRepository.save(student);
+        return toStudentResponseDto(savedStudent);
     }
 
     private Student toStudent(StudentDto dto) {
@@ -34,6 +35,10 @@ public class StudentController {
         student.setSchool(school);
 
         return student;
+    }
+
+    private StudentResponseDto toStudentResponseDto(Student student) {
+        return new StudentResponseDto(student.getFirstname(), student.getLastname(), student.getEmail());
     }
 
     @GetMapping("/students")
